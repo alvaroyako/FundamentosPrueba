@@ -41,8 +41,7 @@ namespace FundamentosPrueba
         {
             int numeroMayor = 999;
             short numeroMenor = 888;
-            //Conversion automatica
-            numeroMayor = numeroMenor;
+        
         }
     }
 }
