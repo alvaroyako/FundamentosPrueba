@@ -17,7 +17,7 @@ namespace FundamentosPrueba
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form4DiaNacimiento());
+            Application.Run(new Form20Temperaturas());
         }
     }
 }
