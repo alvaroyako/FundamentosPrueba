@@ -27,15 +27,12 @@ namespace FundamentosPrueba
         {
             Random random = new Random();
             int[] temperaturas = new int[meses.Length];
+            this.lstMeses.Items.Clear();
 
             for(int i = 0; i < temperaturas.Length; i++)
             {
                 int num = random.Next(1, 50);
                 temperaturas[i] = num;
-            }
-
-            for(int i = 0; i < meses.Length; i++)
-            {
                 string texto = meses[i] + ": " + temperaturas[i] + "º";
                 this.lstMeses.Items.Add(texto);
             }
