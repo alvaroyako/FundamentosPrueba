@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FundamentosPrueba
+namespace AdoNet
 {
     static class Program
     {
@@ -17,7 +17,7 @@ namespace FundamentosPrueba
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form28ColeccionCoches());
+            Application.Run(new Form05ModificarHospital());
         }
     }
 }
