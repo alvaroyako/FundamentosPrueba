@@ -1,6 +1,24 @@
 ﻿<h1 style="color:blueviolet">Menu matematicas</h1>
 <ul class="list-group">
     <li class="list-group-item">
-        class="nav-link text-dark" asp-area="" asp-controller="Matematicas" asp-action="Index"
+        <a asp-controller="Matematicas" asp-action="SumarNumeros">Sumar Numeros</a>
+    </li>
+    <li class="list-group-item">
+        <a asp-controller="Matematicas"
+           asp-action="Collatz"
+           asp-route-numero="13">Collatz 13</a>
+    </li>
+    <li class="list-group-item">
+        <a asp-controller="Matematicas"
+           asp-action="Collatz"
+           asp-route-numero="420">Collatz 420</a>
+    </li>
+    <li class="list-group-item">
+        <a asp-controller="Matematicas"
+           asp-action="Collatz"
+           asp-route-numero="69">Collatz 69</a>
+    </li>
+    <li class="list-group-item">
+        <a asp-controller="Matematicas" asp-action="TablaMultiplicar">Tabla Multiplicar</a>
     </li>
 </ul>
