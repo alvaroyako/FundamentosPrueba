@@ -1,0 +1,30 @@
+﻿<ul class="list-group">
+    <li class="list-group-item">
+        <a asp-controller="Informacion" asp-action="ControladorVista">Informacion controlador vista</a>
+    </li>
+    <li class="list-group-item">
+        @Html.ActionLink("Informacion GET Vista Controller", "VistaControllerGet", "Informacion",
+       new { app = "Net Core", version = 5 })
+    </li>
+    <li class="list-group-item">
+        <a asp-controller="Informacion"
+           asp-action="VistaControllerGet"
+           asp-route-app="Net Core Mvc" asp-route-version="5">
+            Informacion GET Vista Controller
+        </a>
+    </li>
+    <li class="list-group-item">
+        <a asp-controller="Informacion" asp-action="VistaPost">Enviar info POST</a>
+    </li>
+    <li class="list-group-item">
+        <a asp-controller="Informacion"
+           asp-action="VistaNumeroDoble"
+           asp-route-numero="7">Numero Doble 7</a>
+    </li>
+    <li class="list-group-item">
+        <a asp-controller="Informacion"
+           asp-action="VistaNumeroDoble">
+        Numero Doble sin valor
+        </a>
+    </li>
+</ul>

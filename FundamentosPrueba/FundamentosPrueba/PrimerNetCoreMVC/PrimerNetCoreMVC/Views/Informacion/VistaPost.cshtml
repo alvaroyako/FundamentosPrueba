@@ -1,0 +1,21 @@
+﻿@model Persona
+
+<h1>Informacion con POST</h1>
+
+<form method="post">
+    <label>Nombre: </label>
+    <input type="text" name="nombre" class="form-control" />
+    <br />
+    <label>Edad: </label>
+    <input type="number" name="edad" class="form-control" />
+    <br />
+    <label>Email: </label>
+    <input type="text" name="email" class="form-control" />
+    <br />
+    <button type="submit" class="btn btn-info">Enviar informacion</button>
+</form>
+@if (Model != null)
+{
+    <h1>Nombre: @Model.Nombre, Edad: @Model.Edad</h1>
+    <h2 style="color:blueviolet">Email: @Model.Email</h2>
+}

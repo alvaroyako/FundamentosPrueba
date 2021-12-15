@@ -1,0 +1,34 @@
+﻿<h1>Mi primera pagina MVC NET CORE</h1>
+
+@*
+    Comentarios en razor
+*@
+
+Declaracion de variables en razor
+@{ 
+    //Estas variables son locales en la pagina
+    int valor = 14;
+    string texto = "jibiri";
+    valor += 1;
+    texto += ", jobiri";
+}
+
+Dibujar variables
+<h1 style="color:red">@texto</h1>
+
+Codigo Logico
+@if (valor > 0)
+{
+    <h1 style="color:blueviolet">Positivo: @valor</h1>
+}
+else
+{
+    <h1 style="color:orange">Negativo: @valor</h1>
+}
+
+@for(int i = 0; i < 6; i++)
+            {
+                <h1>Hola</h1>
+            }
+                     
+                     
