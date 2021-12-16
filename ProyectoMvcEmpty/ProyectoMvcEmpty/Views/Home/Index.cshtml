@@ -1,1 +1,22 @@
-﻿<h1 style="color:blueviolet">Bienvenido a casa</h1>
+﻿@section title{
+    Home/Casita
+}
+
+@section footer{
+    <h4 style="color:burlywood">Que bien en casa</h4>
+}
+
+<h1 style="color:blueviolet">Bienvenido a casa</h1>
+
+<button type="button" id="botonhijo" class="btn-success">Pulsa y comprueba</button>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#botonhijo").click(function () {
+                alert("Esta va");
+            });
+        });
+    </script>
+}
+
