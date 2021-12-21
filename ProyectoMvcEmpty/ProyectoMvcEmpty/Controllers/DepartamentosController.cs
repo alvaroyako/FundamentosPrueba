@@ -38,7 +38,7 @@ namespace ProyectoMvcEmpty.Controllers
         {
             int results = this.context.InsertDepartamento(id, nombre, localidad);
             ViewData["Mensaje"]= "Insert realizado";
-            return View();
+            return RedirectToAction("Index");
         }
 
         public IActionResult Edit(int id)
@@ -53,6 +53,28 @@ namespace ProyectoMvcEmpty.Controllers
             int results = this.context.UpdateDepartamento(departamento.IdDepartamento, departamento.Nombre, departamento.Localidad);
             ViewData["Mensaje"] = "Ediciom realizada";
             return View(departamento);
+        }
+
+        public IActionResult Delete(int iddepartamento)
+        {
+            this.context.DeleteDepartamento(iddepartamento);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult EmpleadosDepartamento()
+        {
+            List<Departamento> departamentos = this.context.GetDepartamentos();
+            ViewData["Departamentos"] = departamentos;
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult EmpleadosDepartamento(int iddepartamento)
+        {
+            List<Empleado> empleados = this.context.GetEmpleadosDepartamento(iddepartamento);
+            List<Departamento> departamentos = this.context.GetDepartamentos();
+            ViewData["Departamentos"] = departamentos;
+            return View(empleados);
         }
     }
 }

@@ -1,0 +1,40 @@
+﻿<h1>Buscador empleados</h1>
+
+<a asp-controller="Empleados" asp-action="TodosEmpleados">Listado</a>
+
+<form method="post">
+    <label>Salario: </label>
+    <input type="number" name="salario" class="form-control" />
+    <br />
+
+    <label>Oficio: </label>
+    <input type="text" name="oficio" class="form-control" />
+    <br />
+
+    <button type="submit" class="btn btn-outlin-info">Buscar empleados</button>
+
+</form>
+
+@if (Model != null) 
+{
+    <hr />
+    <table class="table table-bordered table-dark">
+        <thead>
+            <tr>
+                <th>Apellido</th>
+                <th>Oficio</th>
+                <th>Salario</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(Empleado empleado in Model)
+                {
+                    <tr>
+                        <td>@empleado.Apellido</td>
+                        <td>@empleado.Oficio</td>
+                        <td>@empleado.Salario</td>
+                    </tr>
+                }
+        </tbody>
+    </table>
+}
