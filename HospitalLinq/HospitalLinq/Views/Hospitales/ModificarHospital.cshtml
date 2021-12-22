@@ -1,0 +1,25 @@
+﻿@model Hospital
+
+<h1>Modificar hospital</h1>
+
+<form method="post">
+    <input type="text" class="form-control" name="cod" value="@Model.Hospital_Cod" hidden />
+
+    <label>Nombre</label>
+    <input type="text" class="form-control" placeholder="@Model.Nombre" name="nom" />
+    <br />
+
+    <label>Direccion</label>
+    <input type="text" class="form-control" placeholder="@Model.Direccion" name="dir" />
+    <br />
+
+    <label>Telefono</label>
+    <input type="text" class="form-control" placeholder="@Model.Telefono" name="tel" />
+    <br />
+
+    <label>Numero de camas</label>
+    <input type="text" class="form-control" placeholder="@Model.Num_Cama" name="num" />
+    <br />
+
+    <button class="btn btn-info" type="submit">Modificar hospital</button>
+</form>
