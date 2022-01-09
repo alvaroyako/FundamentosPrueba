@@ -1,0 +1,18 @@
+﻿
+    <h1 class="text-center">Haz ahora tu reserva</h1>
+    <div class="mt-5 p-5 text-center" style="border-radius: 50px; background: #D9DEE8; box-shadow: 38px 38px 75px #b8bdc5, -38px -38px 75px #faffff; height: 33em;margin: 0 auto">
+        <form action="/crearReserva" method="post">
+            <label for="fecha">Fecha:</label>
+            <input type="date" class="form-control" name="fecha" placeholder="Introduce aqui la fecha" required><br>
+
+            <label for="asistentes">Número de asistentes</label>
+            <input type="number" class="form-control" name="asistentes" value="1" min="1" max="10" placeholder="Introduce aqui el número de asistentes" required><br>
+
+            <label for="hora">Hora de la reserva:</label>
+            <input type="time" class="form-control" name="hora" placeholder="Introduce aqui la hora de la reserva" required><br>
+
+            <button class="btn btn-success" type="submit">Crear</button>
+            <button class="btn btn-danger" type="reset">Rehacer</button>
+        </form>
+    </div>
+
