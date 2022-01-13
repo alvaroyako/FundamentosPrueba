@@ -11,5 +11,7 @@ namespace MvcCrudDepartamentosEFCore2022.Data
     {
         public HospitalesContext(DbContextOptions<HospitalesContext> options) : base(options) { }
         public DbSet<Hospital> Hospitales { get; set; }
+
+        public DbSet<Doctor> Doctores { get; set; }
     }
 }

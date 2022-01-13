@@ -35,6 +35,7 @@ namespace MvcCrudDepartamentosEFCore2022
                 (options => options.UseSqlServer(cadena));
 
             services.AddTransient<RepositoryHospitales>();
+            services.AddTransient<RepositoryDoctores>();
             services.AddDbContext<HospitalesContext>(options => options.UseSqlServer(cadena));
             services.AddControllersWithViews();
         }

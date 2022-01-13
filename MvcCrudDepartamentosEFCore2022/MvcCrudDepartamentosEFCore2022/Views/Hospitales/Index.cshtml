@@ -49,6 +49,9 @@
                 @Html.DisplayFor(modelItem => item.Num_Cama)
             </td>
             <td>
+                <a asp-controller="Doctores"
+                   asp-action="DoctoresResumen"
+                   asp-route-idhospital="@item.IdHospital">Resumen Doctores </a>|
                 <a asp-controller="Hospitales"
                    asp-action="Edit"
                    asp-route-id="@item.IdHospital">Editar </a>|

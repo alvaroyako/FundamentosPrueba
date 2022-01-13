@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace MvcCrudDepartamentosEFCore2022.Models
 {
-    public class Doctor
-    {
         [Table("DOCTOR")]
-        public class Empleado
+        public class Doctor
         {
             [Key]
             [Column("HOSPITAL_COD")]
@@ -20,9 +18,8 @@ namespace MvcCrudDepartamentosEFCore2022.Models
             [Column("APELLIDO")]
             public String Apellido{ get; set; }
             [Column("ESPECIALIDAD")]
-            public DateTime FechaAlta { get; set; }
+            public string Especialidad { get; set; }
             [Column("SALARIO")]
             public int Salario { get; set; }
         }
-    }
 }
