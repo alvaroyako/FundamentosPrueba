@@ -5,14 +5,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MvcCoreEFProcedures.Data;
-using MvcCoreEFProcedures.Repositories;
+using MvcCoreMultiplesBBDD.Data;
+using MvcCoreMultiplesBBDD.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MvcCoreEFProcedures
+namespace MvcCoreMultiplesBBDD
 {
     public class Startup
     {
@@ -26,12 +26,13 @@ namespace MvcCoreEFProcedures
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            string cadena = this.Configuration.GetConnectionString("cadenahospitalclase");
-            services.AddTransient<RepositoryEnfermos>();
-            services.AddTransient<RepositoryDoctores>();
-            services.AddTransient<RepositoryVistas>();
-            services.AddTransient<RepositoryTrabajadores>();
-            services.AddDbContext<EnfermosContext>(options => options.UseSqlServer(cadena));services.AddControllersWithViews();
+            string cadenaoracle = this.Configuration.GetConnectionString("hospitaloracle");
+            string cadenasql = this.Configuration.GetConnectionString("hospitalsqlserver");
+            
+            //services.AddTransient<RepositoryEmpleados>();
+            //services.AddDbContext<HospitalContext>(options=>options.UseOracle(cadenaoracle, options => options
+            //.UseOracleSQLCompatibility("11")));
+            services.AddDbContext<HospitalContext>(options=>options.UseSqlServer(cadenasql));
             services.AddControllersWithViews();
         }
 

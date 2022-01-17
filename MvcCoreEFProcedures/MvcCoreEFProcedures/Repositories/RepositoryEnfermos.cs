@@ -23,7 +23,7 @@ namespace MvcCoreEFProcedures.Repositories
         {
             using (DbCommand com = this.context.Database.GetDbConnection().CreateCommand())
             {
-                string sql = "SP_ALLENFERMOS";
+                string sql = "sp_allenfermos";
                 com.CommandType = CommandType.StoredProcedure;
                 com.CommandText = sql;
                 com.Connection.Open();
@@ -48,7 +48,7 @@ namespace MvcCoreEFProcedures.Repositories
 
         public Enfermo FindEnfermo(int inscripcion)
         {
-            string sql = "SP_FINDENFERMO @INSCRIPCION";
+            string sql = "sp_findenfermo @INSCRIPCION";
             SqlParameter paminscripcion = new SqlParameter("@INSCRIPCION", inscripcion);
             var consulta = this.context.Enfermos.FromSqlRaw(sql, paminscripcion);
             Enfermo enfermo = consulta.AsEnumerable().FirstOrDefault();
@@ -57,7 +57,7 @@ namespace MvcCoreEFProcedures.Repositories
 
         public void DeleteEnfermo(int inscripcion)
         {
-            string sql = "SP_DELETEENFERMO @INSCRIPCION";
+            string sql = "sp_deleteenfermo @INSCRIPCION";
             SqlParameter paminscripcion= new SqlParameter("@INSCRIPCION", inscripcion);
             this.context.Database.ExecuteSqlRaw(sql, paminscripcion);
         }

@@ -23,7 +23,7 @@ namespace MvcCoreEFProcedures.Repositories
         {
             using (DbCommand com = this.context.Database.GetDbConnection().CreateCommand())
             {
-                string sql = "SP_ESPECIALIDAD";
+                string sql = "sp_allespecialidades";
                 com.CommandType = CommandType.StoredProcedure;
                 com.CommandText = sql;
                 com.Connection.Open();
@@ -43,7 +43,7 @@ namespace MvcCoreEFProcedures.Repositories
         public List<Doctor> GetDoctores()
         {
             List<Doctor> doctores = new List<Doctor>();
-            string sql = "SP_DOCTORES";
+            string sql = "sp_alldoctores";
             var consulta = this.context.Doctores.FromSqlRaw(sql);
             doctores = consulta.ToList();
             return doctores;
@@ -51,13 +51,13 @@ namespace MvcCoreEFProcedures.Repositories
 
         public List<Doctor> RealizarIncremento(string especialidad,int incremento)
         {
-            string sql1 = "SP_INCREMENTARSALARIO @INCREMENTO,@ESPECIALIDAD";
+            string sql1 = "sp_incrementarsalarioespecialidad @ESPECIALIDAD,@INCREMENTO";
             SqlParameter pamincremento = new SqlParameter("@INCREMENTO", incremento);
             SqlParameter pamespecialidad1 = new SqlParameter("@ESPECIALIDAD", especialidad);
             this.context.Database.ExecuteSqlRaw(sql1, pamincremento,pamespecialidad1);
 
             List<Doctor> doctores = new List<Doctor>();
-            string sql2 = "SP_DOCTORESESPECIALIDAD @ESPECIALIDAD";
+            string sql2 = "sp_doctoresespecialidad @ESPECIALIDAD";
             SqlParameter pamespecialidad2 = new SqlParameter("@ESPECIALIDAD", especialidad);
             var consulta = this.context.Doctores.FromSqlRaw(sql2,pamespecialidad2);
             doctores = consulta.ToList();
