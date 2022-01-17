@@ -1,0 +1,63 @@
+﻿@model IEnumerable<MvcNetCoreEF2022.Models.Doctor>
+
+@{
+    ViewData["Title"] = "DoctoresSalario";
+}
+
+<h1>DoctoresSalario</h1>
+
+<form method="post" class="form">
+    <label>Introduce el salario: </label>
+    <input class="form-control" type="number" name="salario" />
+    <button type="submit" class="btn btn-success">Buscar</button>
+</form>
+<br />
+<h1 class="text-danger">@ViewBag.Mensaje</h1>
+@if (Model != null) 
+{ 
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdDoctor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Apellido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Especialidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Salario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdHospital)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdDoctor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Apellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Especialidad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Salario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdHospital)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+}
+

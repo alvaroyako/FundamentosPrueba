@@ -5,14 +5,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MvcNetCoreEF2022.Data;
-using MvcNetCoreEF2022.Repositories;
+using ProyectoPracticaEnfermosEF.Data;
+using ProyectoPracticaEnfermosEF.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MvcNetCoreEF2022
+namespace ProyectoPracticaEnfermosEF
 {
     public class Startup
     {
@@ -26,12 +26,9 @@ namespace MvcNetCoreEF2022
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
             string cadenasql = this.Configuration.GetConnectionString("cadenasql");
-            services.AddTransient<RepositoryDoctores>();
-            services.AddDbContext<DoctoresContext>(options => options.UseSqlServer(cadenasql));
-            services.AddTransient<RepositoryHospital>();
-            services.AddDbContext<HospitalesContext>(options=>options.UseSqlServer(cadenasql));
+            services.AddTransient<RepositoryEnfermo>();
+            services.AddDbContext<EnfermosContext>(options => options.UseSqlServer(cadenasql));
             services.AddControllersWithViews();
         }
 
