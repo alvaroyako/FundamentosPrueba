@@ -10,8 +10,8 @@ namespace MvcCoreMultiplesBBDD.Controllers
 {
     public class EmpleadosController : Controller
     {
-        private RepositoryEmpleados repo;
-        public EmpleadosController(RepositoryEmpleados repo)
+        private IRepositoryEmpleados repo;
+        public EmpleadosController(IRepositoryEmpleados repo)
         {
             this.repo = repo;
         }

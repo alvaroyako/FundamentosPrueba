@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Builder;
+ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
@@ -29,10 +29,14 @@ namespace MvcCoreMultiplesBBDD
             string cadenaoracle = this.Configuration.GetConnectionString("hospitaloracle");
             string cadenasql = this.Configuration.GetConnectionString("hospitalsqlserver");
             
-            //services.AddTransient<RepositoryEmpleados>();
+            
+            //services.AddDbContext<HospitalContext>(options => options.UseSqlServer(cadenasql));
             //services.AddDbContext<HospitalContext>(options=>options.UseOracle(cadenaoracle, options => options
             //.UseOracleSQLCompatibility("11")));
-            services.AddDbContext<HospitalContext>(options=>options.UseSqlServer(cadenasql));
+            services.AddDbContext<HospitalContext>(options => options.UseMySQL(cadenasql));
+
+            services.AddTransient<IRepositoryEmpleados, RepositoryEmpleadosOracle>();
+
             services.AddControllersWithViews();
         }
 
