@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using MvcCoreMultiplesBBDD.Data;
 using MvcCoreMultiplesBBDD.Models;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MvcCoreMultiplesBBDD.Repositories
 {
-    public class RepositoryEmpleadosMySql
+    public class RepositoryEmpleadosMySql:IRepositoryEmpleados
     {
         private HospitalContext context;
 
@@ -27,7 +28,11 @@ namespace MvcCoreMultiplesBBDD.Repositories
 
         public Empleado FindEmpleado(int id)
         {
-            return this.context.Empleados.FirstOrDefault(z => z.IdEmpleado == id);
+            string sql = "call sp_find_empleados (idempleado)";
+            MySqlParameter pamid = new MySqlParameter("idempleado", id);
+            var consulta = this.context.Empleados.FromSqlRaw(sql,pamid);
+            Empleado emp = consulta.AsEnumerable().FirstOrDefault();
+            return emp;
 
         }
 

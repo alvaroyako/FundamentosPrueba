@@ -28,14 +28,14 @@ namespace MvcCoreMultiplesBBDD
         {
             string cadenaoracle = this.Configuration.GetConnectionString("hospitaloracle");
             string cadenasql = this.Configuration.GetConnectionString("hospitalsqlserver");
-            
+            string cadenamysql = this.Configuration.GetConnectionString("hospitalmysql");
             
             //services.AddDbContext<HospitalContext>(options => options.UseSqlServer(cadenasql));
             //services.AddDbContext<HospitalContext>(options=>options.UseOracle(cadenaoracle, options => options
             //.UseOracleSQLCompatibility("11")));
-            services.AddDbContext<HospitalContext>(options => options.UseMySQL(cadenasql));
+            services.AddDbContext<HospitalContext>(options => options.UseMySQL(cadenamysql));
 
-            services.AddTransient<IRepositoryEmpleados, RepositoryEmpleadosOracle>();
+            services.AddTransient<IRepositoryEmpleados, RepositoryEmpleadosMySql>();
 
             services.AddControllersWithViews();
         }
