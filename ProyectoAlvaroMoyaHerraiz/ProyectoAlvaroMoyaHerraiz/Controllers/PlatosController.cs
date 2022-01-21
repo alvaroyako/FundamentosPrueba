@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ProyectoAlvaroMoyaHerraiz.Models;
+using ProyectoAlvaroMoyaHerraiz.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +10,16 @@ namespace ProyectoAlvaroMoyaHerraiz.Controllers
 {
     public class PlatosController : Controller
     {
-        public IActionResult ConsultarPlatos()
+
+        private RepositoryUtopiaSqlServer repo;
+        public PlatosController(RepositoryUtopiaSqlServer repo)
         {
-            return View();
+            this.repo = repo;
+        }
+        public IActionResult Index()
+        {
+            List<Plato> platos = this.repo.GetPlatos();
+            return View(platos);
         }
     }
 }

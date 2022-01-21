@@ -17,22 +17,25 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" asp-action="Index" asp-controller="Home"><img src="/img/home.png" style="height:25px;width:25px"/></a>
+                        <a class="nav-link" asp-action="Index" asp-controller="Home"><img src="/img/home.png" style="height:25px;width:25px" /></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#somos">¿Quiénes somos?</a>
+                        <a class="nav-link" asp-action="Index" asp-controller="Reservas">Realizar reserva</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#localizacion">Localización</a>
+                        <a class="nav-link"  asp-action="Index" asp-controller="Platos">Ver menu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"  asp-action="Index" asp-controller="Juegos">Ver juegos de mesa</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Acciones
+                            Usuario
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" asp-action="RealizarReserva" asp-controller="Reservas">Realizar reserva</a>
-                            <a class="dropdown-item" asp-action="ConsultarPlatos" asp-controller="Platos">Ver menu</a>
-                            <a class="dropdown-item" asp-action="ConsultarJuegos" asp-controller="Juegos">Ver juegos de mesa</a>
+                            <a class="dropdown-item" asp-action="Index" asp-controller="Reservas">Realizar reserva</a>
+                            <a class="dropdown-item" asp-action="Index" asp-controller="Platos">Ver menu</a>
+                            <a class="dropdown-item" asp-action="Index" asp-controller="Juegos">Ver juegos de mesa</a>
                         </div>
                     </li>
                 </ul>
@@ -46,7 +49,7 @@
         </main>
     </div>
 
-    <footer class="footer bg-light  rounded-top text-center">
+    <footer class="footer bg-light  rounded-top text-center footer">
         <div class="container py-2">
             <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Licencia de Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Este obra está bajo una licencia de Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional</a>.
 

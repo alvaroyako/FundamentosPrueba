@@ -7,9 +7,9 @@ namespace ProyectoAlvaroMoyaHerraiz.Models
 {
     public class Reserva
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public DateTime Fecha { get; set; }
         public int Asistentes { get; set; }
-        public DateTime Hora { get; set; }
+        public string Hora { get; set; }
     }
 }
