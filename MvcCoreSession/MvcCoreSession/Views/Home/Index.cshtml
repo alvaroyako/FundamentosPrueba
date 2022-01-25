@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@{       //Recuperamos el objeto que esta en session
+    List<Persona> personas = null;
+    if (Context.Session.GetString("PERSONAS") != null)
+    {
+       
+        personas =Context.Session.GetObject<List<Persona>>("PERSONAS");
+    }
+
+}
+
+<div class="text-center">
+    @if (Context.Session.GetString("PERSONAS") != null)
+    { 
+    <h1 style="color:red">Personas almacenadas en Session: @personas.Count()</h1>
+    }
+
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
