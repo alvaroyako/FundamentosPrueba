@@ -10,18 +10,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Net.Mail;
 using System.Net;
+using MvcCoreUtilidades.Helpers;
 
 namespace MvcCoreUtilidades.Controllers
 {
     public class UtilidadesController : Controller
     {
-        private PathProvider pathProvider;
-        private IConfiguration Configuration;
+        private HelperMail helperMail;
+        private HelperUploadFiles helperUpload;
 
-        public UtilidadesController(PathProvider pathProvider,IConfiguration Configuration)
+        public UtilidadesController(HelperMail helperMail,HelperUploadFiles helperUpload)
         {
-            this.pathProvider = pathProvider;
-            this.Configuration = Configuration;
+            this.helperMail = helperMail;
+            this.helperUpload = helperUpload;
         }
         public IActionResult UploadFiles()
         {
@@ -31,12 +32,8 @@ namespace MvcCoreUtilidades.Controllers
         [HttpPost]
         public async Task<IActionResult> UploadFiles(IFormFile fichero)
         {
-            string fileName = fichero.FileName;
-            string path = this.pathProvider.MapPath(fileName,Folders.Uploads);
-            using (Stream stream = new FileStream(path, FileMode.Create)) 
-            {
-                await fichero.CopyToAsync(stream);
-            }
+            string path =await this.helperUpload.UploadFileAsync(fichero, Folders.Uploads);
+            ViewBag.FileName = "aq";
             ViewBag.Mensaje = "Fichero subido a " + path;
             return View();
         }
@@ -49,36 +46,17 @@ namespace MvcCoreUtilidades.Controllers
         [HttpPost]
         public async Task <IActionResult> SendMail(string destinatario, string asunto, string mensaje, IFormFile fichero)
         {
-            MailMessage mail = new MailMessage();
-            string user = this.Configuration.GetValue<string>("MailSettings:user");
-            mail.From = new MailAddress(user);
-            mail.To.Add(new MailAddress(destinatario));
-            mail.Subject = asunto;
-            mail.Body = mensaje;
-            mail.IsBodyHtml = true;
-            mail.Priority = MailPriority.Normal;
-
             if (fichero != null)
             {
-                string fileName = fichero.FileName;
-                string path = this.pathProvider.MapPath(fileName, Folders.Temp);
-                using (Stream stream = new FileStream(path, FileMode.Create))
-                {
-                    await fichero.CopyToAsync(stream);
-                }
-                Attachment attachment = new Attachment(path);
-                mail.Attachments.Add(attachment);
+                string path=
+                await this.helperUpload.UploadFileAsync(fichero, Folders.Temp);
+                this.helperMail.SendMail(destinatario,asunto,mensaje,path);
             }
-            string host = this.Configuration.GetValue<string>("MailSettings:Host");
-            string password = this.Configuration.GetValue<string>("MailSettings:Password");
-            SmtpClient client = new SmtpClient();
-            client.Host = host;
-            client.Port = 587;
-            client.EnableSsl = true;
-            client.UseDefaultCredentials = false;
-            NetworkCredential credentials = new NetworkCredential(user, password);
-            client.Credentials = credentials;
-            client.Send(mail);
+            else
+            {
+                this.helperMail.SendMail(destinatario, asunto, mensaje);
+            }
+
             ViewData["MENSAJE"] = "Mail enviado correctamente";
             return View();
         }
