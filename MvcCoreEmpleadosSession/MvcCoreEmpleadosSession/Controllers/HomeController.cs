@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using MvcCoreCifradoBDD.Models;
+using MvcCoreEmpleadosSession.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MvcCoreCifradoBDD.Controllers
+namespace MvcCoreEmpleadosSession.Controllers
 {
     public class HomeController : Controller
     {
@@ -16,13 +16,6 @@ namespace MvcCoreCifradoBDD.Controllers
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-        }
-
-        [ResponseCache(Duration = 15, Location = ResponseCacheLocation.Client, NoStore = true)]
-        public IActionResult Index()
-        {
-            List<Empleado> empleados = this.repo.GetEmpleados();
-            return View(empleados);
         }
 
         public IActionResult Index()
@@ -35,6 +28,10 @@ namespace MvcCoreCifradoBDD.Controllers
             return View();
         }
 
-        
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
     }
 }

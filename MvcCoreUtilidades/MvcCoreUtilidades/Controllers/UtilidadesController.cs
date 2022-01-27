@@ -25,6 +25,8 @@ namespace MvcCoreUtilidades.Controllers
             this.helperUpload = helperUpload;
         }
 
+
+
         public IActionResult CifradoEficiente()
         {
             return View();

@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using MvcCoreCifradoBDD.Helpers;
 using MvcCoreCifradoBDD.Models;
+using MvcCoreCifradoBDD.Providers;
 using MvcCoreCifradoBDD.Repositories;
 using System;
 using System.Collections.Generic;
@@ -11,15 +14,29 @@ namespace MvcCoreCifradoBDD.Controllers
     public class UsuariosController : Controller
     {
         private RepositoryUsuarios repo;
-        public UsuariosController(RepositoryUsuarios repo)
+        private HelperUploadFiles helperUpload;
+        public UsuariosController(RepositoryUsuarios repo, HelperUploadFiles helperUpload)
         {
             this.repo = repo;
+            this.helperUpload = helperUpload;
+        }
+
+        
+
+        public IActionResult Register()
+        {
+            return View();
         }
 
         [HttpPost]
-        public IActionResult Register(string nombre, string email, string password, string imagen)
+        public async Task <IActionResult> Register(string nombre, string email, string password, IFormFile imagen)
         {
-            this.repo.RegistrarUsuario(nombre, email, password, imagen);
+            string filename = imagen.FileName;
+            int idusuario=this.repo.RegistrarUsuario(nombre, email, password, filename);
+            filename = idusuario + "_" + filename;
+            await this.helperUpload.UploadFileAsync(imagen, Folders.Images,filename);
+
+
             ViewData["MENSAJE"] = "Usuario registrado correctamente";
             return View();
         }

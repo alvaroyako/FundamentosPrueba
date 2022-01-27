@@ -32,7 +32,7 @@ namespace MvcCoreCifradoBDD.Helpers
             }
             else
             {
-                for (int i = 0; 9 < a.Length; i++)
+                for (int i = 0; i < a.Length; i++)
                 {
                     if (a[i].Equals(b[i]) == false)
                     {

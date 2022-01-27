@@ -29,16 +29,19 @@ namespace MvcCoreCifradoBDD.Repositories
             }
         }
 
-        public void RegistrarUsuario(string nombre,string email,string password, string imagen)
+        public int RegistrarUsuario(string nombre,string email,string password, string imagen)
         {
+            int idusuario = this.GetMaxIdUsuario();
             Usuario usuario = new Usuario();
             usuario.IdUsuario = this.GetMaxIdUsuario();
             usuario.Nombre = nombre;
             usuario.Email = email;
             usuario.Salt = HelperCryptography.GenerateSalt();
             usuario.Password = HelperCryptography.EncriptarPassword(password, usuario.Salt);
+            usuario.Imagen = idusuario+"_"+imagen;
             this.context.Usuarios.Add(usuario);
             this.context.SaveChanges();
+            return idusuario;
         }
 
 
