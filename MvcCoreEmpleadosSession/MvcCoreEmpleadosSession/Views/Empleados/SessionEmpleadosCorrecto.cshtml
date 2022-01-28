@@ -1,0 +1,50 @@
+﻿@model List<Empleado>
+
+<h1>Empleados Session Correcto</h1>
+
+<h2>@ViewData["MENSAJE"]</h2>
+<a asp-controller="Empleados"
+   asp-action="EmpleadosAlmacenadosCorrecto">Empleados almacenados</a>
+
+<ul>
+    @foreach (Empleado emp in Model)
+    {
+
+        
+    <li class="list-group-item-danger list-group-item">
+        @emp.Apellido
+        @if (Context.Session.GetObject<List<int>>("IDSEMPLEADOS") != null)
+        {
+
+
+            @if (Context.Session.GetObject<List<int>>("IDSEMPLEADOS").Contains(emp.IdEmpleado))
+            {
+               
+                <img src="~/images/rayo.png" />
+
+
+            }
+            else
+            {
+    <a asp-controller="Empleados"
+       asp-action="SessionEmpleadosCorrecto"
+       asp-route-idempleado="@emp.IdEmpleado"
+       class="btn btn-info">
+        Almacenar Empleado
+    </a>
+            }
+
+        }
+                else
+                {
+                    <a asp-controller="Empleados"
+                   asp-action="SessionEmpleadosCorrecto"
+                   asp-route-idempleado="@emp.IdEmpleado"
+                   class="btn btn-info">
+                    Almacenar Empleado
+                </a>
+                }
+    </li>
+
+    }
+    </ul>

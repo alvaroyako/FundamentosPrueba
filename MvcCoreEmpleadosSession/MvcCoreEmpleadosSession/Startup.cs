@@ -1,9 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MvcCoreEmpleadosSession.Data;
+using MvcCoreEmpleadosSession.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +27,20 @@ namespace MvcCoreEmpleadosSession
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            string cadena = this.Configuration.GetConnectionString("cadenasql");
+
+            services.AddTransient<RepositoryEmpleados>();
+            services.AddDbContext<EmpleadosContext>(options => options.UseSqlServer(cadena)); services.AddControllersWithViews();
+
+            services.AddHttpContextAccessor();
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(15);
+            });
+
             services.AddControllersWithViews();
         }
 
@@ -45,6 +63,9 @@ namespace MvcCoreEmpleadosSession
             app.UseRouting();
 
             app.UseAuthorization();
+           
+            app.UseSession();
+
 
             app.UseEndpoints(endpoints =>
             {
