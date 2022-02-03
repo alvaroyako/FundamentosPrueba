@@ -147,5 +147,7 @@ namespace MvcCoreEmpleadosSession.Controllers
             ViewData["FACTURA"] = factura;
             return View();
         }
+
+        
     }
 }

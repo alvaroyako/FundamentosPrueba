@@ -1,0 +1,30 @@
+﻿@{
+    Empleado empleado = Context.Session.GetObject<Empleado>("USUARIO");
+}
+
+@if (empleado == null)
+{
+    <li class="nav-item">
+        <a asp-controller="Home"
+           asp-action="LogIn"
+           class="nav-link">
+            Log In
+        </a>
+    </li>
+}
+else
+{
+    <li class="nav-item">
+        <a asp-controller="Home"
+           asp-action="CloseSession"
+           class="nav-link text-danger">
+            Sign Out @empleado.Apellido, @empleado.Oficio
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" asp-controller="Home" asp-action="VaciarCarrito">Vaciar carrito</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">Comentarios</a>
+    </li>
+}

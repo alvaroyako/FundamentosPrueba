@@ -31,6 +31,12 @@ namespace MvcCoreEmpleadosSession.Repositories
             this.context.Empleados.FirstOrDefault(z => z.IdEmpleado == id);
         }
 
+        public Empleado FindEmpleadoApellido(string apellido)
+        {
+            return
+            this.context.Empleados.FirstOrDefault(z => z.Apellido == apellido);
+        }
+
         public List<Empleado> GetEmpleadosSession(List<int> idsEmpleados)
         {
             var consulta = from datos in this.context.Empleados where idsEmpleados.Contains(datos.IdEmpleado) select datos;
