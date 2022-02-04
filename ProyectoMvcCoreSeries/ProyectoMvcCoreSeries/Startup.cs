@@ -1,9 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ProyectoMvcCoreSeries.Data;
+using ProyectoMvcCoreSeries.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +26,11 @@ namespace ProyectoMvcCoreSeries
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            string cadena = this.Configuration.GetConnectionString("cadenasql");
+
+            services.AddTransient<RepositorySeries>();
+            services.AddDbContext<SeriesContext>(options => options.UseSqlServer(cadena)); services.AddControllersWithViews();
+            
             services.AddControllersWithViews();
         }
 

@@ -7,23 +7,21 @@ using System.Threading.Tasks;
 
 namespace ProyectoMvcCoreSeries.Models
 {
-    [Table("SERIES")]
-    public class Serie
+    [Table("PERSONAJES")]
+    public class Personaje
     {
         [Key]
-        [Column("IDSERIE")]
-        public int IdSerie { get; set; }
+        [Column("IDPERSONAJE")]
+        public int IdPersonaje { get; set; }
 
-        [Column("SERIE")]
+        [Column("PERSONAJE")]
         public string Nombre { get; set; }
 
         [Column("IMAGEN")]
         public string Imagen { get; set; }
 
-        [Column("PUNTUACION")]
-        public double Puntuacion { get; set; }
+        [Column("IDSERIE")]
+        public int IdSerie { get; set; }
 
-        [Column("AÑO")]
-        public int Año { get; set; }
     }
 }
