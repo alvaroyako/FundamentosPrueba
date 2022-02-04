@@ -53,6 +53,34 @@ namespace MvcCorePaginacionRegistros.Controllers
             return View(departamentos);
         }
 
+        public IActionResult PaginarGrupoEmpleados(int? posicion, string oficio)
+        {
+            if (posicion == null)
+            {
+                posicion = 1;
+                return View();
+            }
+            else
+            {
+                int numeroRegistros = 0;
+                List<Empleado> empleados = this.repo.GetGrupoEmpleados(posicion.Value, oficio, ref numeroRegistros);
+                ViewData["NUMEROREGISTROS"] = numeroRegistros;
+                ViewData["OFICIO"] = oficio;
+                return View(empleados);
+            }
+            
+        }
+
+        [HttpPost]
+        public IActionResult PaginarGrupoEmpleados(string oficio)
+        {
+            int numeroRegistros = 0;
+            List<Empleado> empleados = this.repo.GetGrupoEmpleados(1, oficio, ref numeroRegistros);
+            ViewData ["NUMEROREGISTROS"] = numeroRegistros;
+            ViewData["OFICIO"] = oficio;
+                return View(empleados);
+        }
+
         public IActionResult PaginarRegistroVistaDepartamento(int? posicion)
         {
             if (posicion == null)
