@@ -1,0 +1,6 @@
+﻿@model Enfermo
+
+<h1>Desea borrar al enfermo?</h1>
+
+<a asp-controller="Enfermos" asp-action="ListaEnfermos" class="btn btn-danger">Non</a>
+<a asp-controller="Enfermos" asp-action="Delete" asp-route-inscripcion="@Model.Inscripcion" class="btn btn-success">Sis</a>
