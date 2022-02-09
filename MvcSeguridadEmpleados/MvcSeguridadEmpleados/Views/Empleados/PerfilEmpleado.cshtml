@@ -1,0 +1,22 @@
+﻿<h1 class="text-primary">
+    Perfil del empleado
+</h1>
+
+<h2 style="color:red">
+    Apellido: @Context.User.Identity.Name
+</h2>
+<h2>
+    Oficio:@Context.User.FindFirst(ClaimTypes.Role).Value
+</h2>
+<h2 style="color:green">
+    Salario:@Context.User.FindFirst("Salario").Value
+</h2>
+<ul>
+    @foreach(var claim in Context.User.Claims)
+            {
+                <li class="list-group-item list-group-item-warning">
+                    @claim.Type,@claim.Value
+
+                </li>
+            }
+</ul>
