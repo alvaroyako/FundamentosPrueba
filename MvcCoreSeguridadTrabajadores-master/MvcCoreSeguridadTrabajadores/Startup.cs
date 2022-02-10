@@ -7,14 +7,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MvcCoreEliminarEnfermoValidacion.Data;
-using MvcCoreEliminarEnfermoValidacion.Repositories;
+using MvcCoreSeguridadTrabajadores.Data;
+using MvcCoreSeguridadTrabajadores.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MvcCoreEliminarEnfermoValidacion
+namespace MvcCoreSeguridadTrabajadores
 {
     public class Startup
     {
@@ -30,27 +30,28 @@ namespace MvcCoreEliminarEnfermoValidacion
         {
             services.AddDistributedMemoryCache();
             services.AddSession();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("PermisosElevados", policy => policy.RequireRole("CARDIOLOGIA","DIAGNOSTICO"));
+            });
+
             services.AddAuthentication(options =>
             {
-                options.DefaultSignInScheme =
-                CookieAuthenticationDefaults.AuthenticationScheme;
-
                 options.DefaultAuthenticateScheme =
                 CookieAuthenticationDefaults.AuthenticationScheme;
-
                 options.DefaultChallengeScheme =
                 CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultSignInScheme =
+                CookieAuthenticationDefaults.AuthenticationScheme;
             }).AddCookie();
-
-            String cadena = this.Configuration.GetConnectionString("cadenasql");
-            services.AddTransient<RepositoryEnfermos>();
-            services.AddDbContext<EnfermosContext>(options => options.UseSqlServer(cadena));
-            
+            string cadena = this.Configuration.GetConnectionString("cadenahospital");
+            services.AddTransient<RepositoryDoctores>();
+            services.AddDbContext<DoctoresContext>
+                (options => options.UseSqlServer(cadena));
             services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
-            
             services.AddControllersWithViews
                 (options => options.EnableEndpointRouting = false)
-                .AddSessionStateTempDataProvider();
+                .AddCookieTempDataProvider();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -73,13 +74,13 @@ namespace MvcCoreEliminarEnfermoValidacion
 
             app.UseAuthentication();
             app.UseAuthorization();
+
             app.UseSession();
-            app.UseMvc(routes =>
+            app.UseMvc(route =>
             {
-                routes.MapRoute(
+                route.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}"
-                    );
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

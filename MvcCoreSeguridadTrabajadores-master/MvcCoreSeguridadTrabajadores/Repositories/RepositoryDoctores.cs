@@ -1,17 +1,16 @@
-﻿using MvcCoreEliminarEnfermoValidacion.Data;
-using MvcCoreEliminarEnfermoValidacion.Models;
+﻿using MvcCoreSeguridadTrabajadores.Data;
+using MvcCoreSeguridadTrabajadores.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MvcCoreEliminarEnfermoValidacion.Repositories
+namespace MvcCoreSeguridadTrabajadores.Repositories
 {
-    public class RepositoryEnfermos
+    public class RepositoryDoctores
     {
-        private EnfermosContext context;
-
-        public RepositoryEnfermos(EnfermosContext context)
+        private DoctoresContext context;
+        public RepositoryDoctores(DoctoresContext context)
         {
             this.context = context;
         }
@@ -34,13 +33,19 @@ namespace MvcCoreEliminarEnfermoValidacion.Repositories
             this.context.SaveChanges();
         }
 
+        public Doctor Finddoctor(int iddoctor)
+        {
+            return this.context.Doctores.SingleOrDefault
+                (z => z.IdDoctor == iddoctor);
+        }
+
         public Doctor ExisteDoctor(string apellido, int iddoctor)
         {
             var consulta = from datos in this.context.Doctores
                            where datos.Apellido == apellido
                            && datos.IdDoctor == iddoctor
                            select datos;
-            return consulta.SingleOrDefault();
+            return consulta.FirstOrDefault();
         }
     }
 }

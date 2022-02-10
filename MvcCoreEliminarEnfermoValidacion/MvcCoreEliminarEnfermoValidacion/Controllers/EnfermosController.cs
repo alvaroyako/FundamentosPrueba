@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MvcCoreEliminarEnfermoValidacion.Filters;
 using MvcCoreEliminarEnfermoValidacion.Models;
 using MvcCoreEliminarEnfermoValidacion.Repositories;
 using System;
@@ -22,15 +23,20 @@ namespace MvcCoreEliminarEnfermoValidacion.Controllers
             return View(enfermos);
         }
 
-        public IActionResult ConfirmarDelete(int inscripcion)
+        
+
+        [AuthorizeDoctores]
+        public IActionResult ConfirmarDelete(string id)
         {
-            return View(this.repo.FindEnfermo(inscripcion));
+            return View(this.repo.FindEnfermo(id));
         }
 
-        public IActionResult Delete(int inscripcion)
+         [HttpPost]
+            public IActionResult Delete(string id, string accion)
         {
-            this.repo.DeleteEnfermo(inscripcion);
-            ViewData["CONFIRMACION"] = "Enfermo eliminado con exito";
+
+            this.repo.DeleteEnfermo(id);
+            
             return RedirectToAction("ListaEnfermos");
         }
     }

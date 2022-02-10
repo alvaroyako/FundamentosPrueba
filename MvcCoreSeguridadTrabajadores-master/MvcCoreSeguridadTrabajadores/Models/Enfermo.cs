@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MvcCoreEliminarEnfermoValidacion.Models
+namespace MvcCoreSeguridadTrabajadores.Models
 {
     [Table("ENFERMO")]
     public class Enfermo
@@ -13,20 +13,15 @@ namespace MvcCoreEliminarEnfermoValidacion.Models
         [Key]
         [Column("INSCRIPCION")]
         public string Inscripcion { get; set; }
-
         [Column("APELLIDO")]
-        public string Apellido { get; set; }
-
+        public String Apellido { get; set; }
         [Column("DIRECCION")]
-        public string Direccion { get; set; }
-
+        public String Direccion { get; set; }
         [Column("FECHA_NAC")]
-        public DateTime Fecha { get; set; }
-
+        public DateTime FechaNacimiento { get; set; }
         [Column("S")]
-        public string sexo { get; set; }
-
+        public String Genero { get; set; }
         [Column("NSS")]
-        public string nss { get; set; }
+        public String SeguridadSocial { get; set; }
     }
 }
