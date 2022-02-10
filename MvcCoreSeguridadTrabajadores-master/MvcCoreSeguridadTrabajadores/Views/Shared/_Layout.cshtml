@@ -38,7 +38,14 @@
                                 Enfermos
                             </a>
                         </li>
-                        <partial name="_MenuDoctoresPartial"/>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark"
+                               asp-controller="Doctores"
+                               asp-action="AdminDoctor">
+                                Admin Doctor
+                            </a>
+                        </li>
+                        <partial name="_MenuDoctoresPartial" />
                     </ul>
                 </div>
             </div>

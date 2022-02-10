@@ -37,12 +37,22 @@ namespace MvcCoreSeguridadTrabajadores.Controllers
                     new ClaimsIdentity
                     (CookieAuthenticationDefaults.AuthenticationScheme
                     , ClaimTypes.Name, ClaimTypes.Role);
+
                 identity.AddClaim
                     (new Claim(ClaimTypes.Name, doctor.Apellido));
+
                 identity.AddClaim
                     (new Claim(ClaimTypes.NameIdentifier, doctor.IdDoctor.ToString()));
+
                 identity.AddClaim
                     (new Claim(ClaimTypes.Role, doctor.Especialidad));
+
+                identity.AddClaim(new Claim("Salario", doctor.Salario.ToString()));
+                if (doctor.IdDoctor == 386)
+                {
+                    identity.AddClaim
+                        (new Claim("Administrador", "Todo me vale"));
+                }
                 ClaimsPrincipal user = new ClaimsPrincipal(identity);
                 await HttpContext.SignInAsync
                     (CookieAuthenticationDefaults.AuthenticationScheme

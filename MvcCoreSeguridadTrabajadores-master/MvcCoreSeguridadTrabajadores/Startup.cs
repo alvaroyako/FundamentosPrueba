@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MvcCoreSeguridadTrabajadores.Data;
+using MvcCoreSeguridadTrabajadores.Policies;
 using MvcCoreSeguridadTrabajadores.Repositories;
 using System;
 using System.Collections.Generic;
@@ -32,7 +33,9 @@ namespace MvcCoreSeguridadTrabajadores
             services.AddSession();
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("PermisosElevados", policy => policy.RequireRole("CARDIOLOGIA","DIAGNOSTICO"));
+                options.AddPolicy("PermisosElevados", policy => policy.RequireRole("Cardiología","DIAGNÓSTICO"));
+                options.AddPolicy("AdminOnly", policy => policy.RequireClaim("Administrador"));
+                options.AddPolicy("SoloDoctoresRicos", policy => policy.Requirements.Add(new OverSalarioRequirement()));
             });
 
             services.AddAuthentication(options =>
@@ -43,7 +46,11 @@ namespace MvcCoreSeguridadTrabajadores
                 CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultSignInScheme =
                 CookieAuthenticationDefaults.AuthenticationScheme;
-            }).AddCookie();
+            }).AddCookie(
+                CookieAuthenticationDefaults.AuthenticationScheme, config=>
+                {
+                    config.AccessDeniedPath = "/Manage/ErrorAcceso";
+                });
             string cadena = this.Configuration.GetConnectionString("cadenahospital");
             services.AddTransient<RepositoryDoctores>();
             services.AddDbContext<DoctoresContext>
