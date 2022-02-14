@@ -60,7 +60,7 @@ namespace MvcCoreLinqXML.Repositories
             return pelicula;
         }
 
-        public List<Escena> MostrarEscenas(int idpelicula)
+        public List <Escena> MostrarEscenas(int idpelicula)
         {
             var consulta = from datos in this.documentescenas.Descendants("escena")
                            where datos.Attribute("idpelicula").Value == idpelicula.ToString()
@@ -75,7 +75,31 @@ namespace MvcCoreLinqXML.Repositories
                 escena.Imagen = dato.Element("imagen").Value;
                 escenas.Add(escena);
             }
+            
             return escenas;
         }
+
+        public Escena MostrarEscena(int idpelicula, int posicion, ref int numeroescenas)
+        {
+            var consulta = from datos in this.documentescenas.Descendants("escena")
+                           where datos.Attribute("idpelicula").Value == idpelicula.ToString()
+                           select datos;
+            List<Escena> escenas = new List<Escena>();
+            foreach (XElement dato in consulta)
+            {
+                Escena escena = new Escena();
+                escena.IdPelicula = int.Parse(dato.Attribute("idpelicula").Value);
+                escena.Nombre = dato.Element("tituloescena").Value;
+                escena.Descripcion = dato.Element("descripcion").Value;
+                escena.Imagen = dato.Element("imagen").Value;
+                escenas.Add(escena);
+            }
+            numeroescenas = escenas.Count();
+            Escena escena1 = escenas.Skip(posicion).Take(1).FirstOrDefault();
+            return escena1;
+        }
+
+
+
     }
 }

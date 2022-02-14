@@ -27,5 +27,36 @@ namespace MvcCoreLinqXML.Controllers
             List<Escena> escenas = this.repo.MostrarEscenas(idpelicula);
             return View(escenas);
         }
+
+        public IActionResult EscenaPelicula(int idpelicula,int? posicion)
+        {
+            if (posicion == null)
+            {
+                posicion = 0;
+            }
+            int numeroregistros = 0;
+            Escena escena = this.repo.MostrarEscena(1, posicion.Value, ref numeroregistros);
+            ViewData["REGISTROS"] = "Escena "+(posicion+1)+" de "+ numeroregistros;
+            int siguiente = posicion.Value + 1;
+            if (siguiente >= numeroregistros)
+            {
+                siguiente = 0;
+            }
+            int anterior = posicion.Value - 1;
+            if (anterior < 0)
+            {
+                anterior = numeroregistros - 1;
+            }
+            ViewData["SIGUIENTE"] = siguiente;
+            ViewData["ANTERIOR"] = anterior;
+            
+            return View(escena);
+        }
+
+        public IActionResult DetallesPelicula (int idpelicula)
+        {
+            Pelicula peli = this.repo.FindPelicula(idpelicula);
+            return View (peli);
+        }
     }
 }
