@@ -23,9 +23,10 @@ namespace MvcCoreClientesWCF.Controllers
             return View(countries);
         }
 
-        public void DetallesCountry()
+        public async Task <IActionResult> DetallesCountry(string isocode)
         {
-            
+            tCountryInfo country = await this.service.DetallesCountry(isocode);
+            return View(country);
         }
     }
 }

@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MvcCoreClientesWCF.Services;
+using ReferenceNumberConversion;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +25,10 @@ namespace MvcCoreClientesWCF
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<ServiceCountries>();
+            NumberConversionSoapTypeClient clientNumberConversion = new NumberConversionSoapTypeClient(NumberConversionSoapTypeClient.EndpointConfiguration.NumberConversionSoap);
+            services.AddSingleton<NumberConversionSoapTypeClient>(z => clientNumberConversion);
+            services.AddTransient<ServiceNumberConversion>();
             services.AddControllersWithViews();
         }
 

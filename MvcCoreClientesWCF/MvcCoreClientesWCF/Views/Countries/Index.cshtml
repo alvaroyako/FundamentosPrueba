@@ -5,6 +5,7 @@
             {
                 <li class="list-group-item">
                     @country.sName
+                    <a asp-controller="Countries" asp-action="DetallesCountry" asp-route-isocode="@country.sISOCode" class="btn btn-info">Detalles</a>
                 </li>
             }
 </ul>
