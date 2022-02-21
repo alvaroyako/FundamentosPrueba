@@ -1,0 +1,65 @@
+﻿@model IEnumerable<ExamenASPÁlvaroMoyaHerraiz.Models.VistaLibro>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@{ 
+    int numeroPagina = 1;
+    int numeroRegistros = (int)ViewData["NUMEROREGISTROS"];
+}
+
+<h1>Libros</h1>
+
+<ul class="list-group list-group-horizontal">
+    @for(int i = 1; i <= numeroRegistros; i += 4)
+            {
+ 
+        <a class="btn btn-warning" asp-controller="Home"
+           asp-action="Index"
+           asp-route-posicion="@i">
+            @numeroPagina
+        </a>
+        numeroPagina++;
+
+    }
+</ul>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Titulo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Autor)
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.Portada)
+            </th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Titulo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Autor)
+            </td>
+            
+            <td>
+                <img src="~/images/@item.Portada" style="width:100px;height:150px" />
+            </td>
+           
+            <td>
+                <a asp-action="DetallesLibro" asp-controller="Libros" asp-route-idlibro="@item.IdLibro" class="btn btn-info">Detalles</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

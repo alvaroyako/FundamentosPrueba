@@ -1,3 +1,4 @@
+using ReferenceCatastro;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,6 +30,8 @@ namespace MvcCoreClientesWCF
             NumberConversionSoapTypeClient clientNumberConversion = new NumberConversionSoapTypeClient(NumberConversionSoapTypeClient.EndpointConfiguration.NumberConversionSoap);
             services.AddSingleton<NumberConversionSoapTypeClient>(z => clientNumberConversion);
             services.AddTransient<ServiceNumberConversion>();
+            services.AddSingleton<CallejerodelasedeelectrónicadelcatastroSoapClient>();
+            services.AddTransient<ServiceCatastro>();
             services.AddControllersWithViews();
         }
 
