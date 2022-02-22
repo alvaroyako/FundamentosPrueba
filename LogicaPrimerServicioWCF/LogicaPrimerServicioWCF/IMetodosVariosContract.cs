@@ -16,6 +16,9 @@ namespace LogicaPrimerServicioWCF
         [OperationContract]
         string GetSaludo(string nombre);
 
+        [OperationContract]
+        List<int> GetTablaMultiplicar(int numero);
+
         string MetodoInvisible();
     }
 }

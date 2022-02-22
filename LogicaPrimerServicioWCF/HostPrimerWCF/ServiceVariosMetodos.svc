@@ -1,1 +1,1 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="HostPrimerWCF.Service1" CodeBehind="ServiceVariosMetodos.svc.cs" %>
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="LogicaPrimerServicioWCF.MetodosVariosClass" %>
