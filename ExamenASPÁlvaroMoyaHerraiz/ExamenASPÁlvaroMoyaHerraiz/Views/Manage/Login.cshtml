@@ -1,0 +1,18 @@
+﻿<h1>Log In</h1>
+
+<form method="post">
+    <label>Email</label>
+    <input required type="email" name="email" class="form-control" />
+    <br />
+    <label>Password</label>
+    <input required type="password" name="password" class="form-control" />
+    <br />
+    <button type="submit" class="btn btn-success">Iniciar sesión</button>
+    <br />
+    <br />
+    <button type="reset" class="btn btn-danger">Rehacer</button>
+    <hr />
+    <p style="color:red">
+        @ViewData["MENSAJE"]
+    </p>
+</form>

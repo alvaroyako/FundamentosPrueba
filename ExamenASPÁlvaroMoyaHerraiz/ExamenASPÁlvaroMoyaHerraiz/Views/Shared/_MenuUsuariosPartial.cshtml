@@ -1,0 +1,51 @@
+﻿@{
+    List<int> libros = Context.Session.GetObject<List<int>>("CARRITO");
+    int idusuario = -1;
+    if (Context.User.Identity.IsAuthenticated == true)
+    {
+        idusuario= int.Parse(Context.User.FindFirst(ClaimTypes.NameIdentifier).Value);
+    }
+
+}
+
+
+@if (Context.User.Identity.IsAuthenticated == false)
+{
+    
+    <div class="text-center">
+        @if (libros == null)
+        {
+            <span>Carrito: 0</span>
+        }
+        else
+        {
+            <a class="btn btn-warning" asp-controller="Carrito" asp-action="Carrito">Carrito: @libros.Count()</a>
+        }
+        <a asp-controller="Home"
+           asp-action="GoToHome"
+           class="btn btn-success">
+            Log In
+        </a>
+    </div>
+}
+else
+{
+    <div class="text-center">
+        @if (libros == null)
+        {
+            <span>Carrito: 0</span>
+        }
+        else
+        {
+            <a class="btn btn-warning" asp-controller="Carrito" asp-action="Carrito">Carrito: @libros.Count()</a>
+        }
+        <img src="~/images/@Context.User.FindFirst("Foto").Value" style="border-radius:50%; width:5em;height:5em" />
+        <a class="btn btn-info" asp-action="DetallesUsuario" asp-controller="Usuarios" asp-route-idusuario="@idusuario">Hola, @Context.User.Identity.Name</a>
+        <a asp-controller="Manage"
+           asp-action="LogOut"
+           class="btn btn-danger">
+            Log Out
+        </a>
+
+    </div>
+}

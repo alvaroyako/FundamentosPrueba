@@ -1,14 +1,45 @@
-﻿@model IEnumerable<MvcCoreLinqXML.Models.Escena>
+﻿@model Escena
 
 @{
     ViewData["Title"] = "Escenas";
 }
 
 <h1>Escenas</h1>
+<h2>Hay @ViewData["REGISTROS"] escenas</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<div>
+    <ul class="list-group list-group-horizontal">
+        <li class="list-group-item list-group-item-warning">
+            <a asp-controller="Peliculas"
+               asp-action="Escenas"
+               asp-route-posicion="1">
+                Primero
+            </a>
+        </li>
+        <li class="list-group-item list-group-item-warning">
+            <a asp-controller="Peliculas"
+               asp-action="Escenas"
+               asp-route-posicion="@ViewData["ANTERIOR"]">
+                Anterior
+            </a>
+        </li>
+        <li class="list-group-item list-group-item-warning">
+            <a asp-controller="Peliculas"
+               asp-action="Escenas"
+               asp-route-posicion="@ViewData["SIGUIENTE"]">
+                Siguiente
+            </a>
+        </li>
+        <li class="list-group-item list-group-item-warning">
+            <a asp-controller="Peliculas"
+               asp-action="Escenas"
+               asp-route-posicion="@ViewData["ULTIMO"]">
+                Ultimo
+            </a>
+        </li>
+    </ul>
+</div>
+
 <table class="table">
     <thead>
         <tr>
@@ -26,20 +57,17 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            
+        <tr>   
             <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
+                @Model.Nombre
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Descripcion)
+                @Model.Descripcion
             </td>
             <td>
-                <img src="@item.Imagen" />
+                @Model.Imagen
             </td>
             
         </tr>
-}
     </tbody>
 </table>
